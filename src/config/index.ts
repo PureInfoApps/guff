@@ -17,6 +17,8 @@ export default {
 
   databaseHost: process.env.DB_HOST,
 
+  databasePort: parseInt(process.env.DB_PORT, 10),
+
   databasePassword: process.env.DB_PASSWORD,
 
   databaseUser: process.env.DB_USER,

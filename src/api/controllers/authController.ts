@@ -61,7 +61,7 @@ export class AuthController {
       const username = req.currentUser.username;
       const { password } = req.body;
 
-      const resul = await this.authServiceInstance.changePassowrd(username, password);
+      const resul = await this.authServiceInstance.changePassword(username, password);
       return res.status(200).json(Result.success(resul));
     } catch (error) {
       return next(error);

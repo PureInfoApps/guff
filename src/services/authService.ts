@@ -35,8 +35,6 @@ export default class AuthService {
 
   private async signUp(userInputDTO: IUserInputDTO, role: IUser['role']): Promise<{ user: IUser; token: string }> {
     try {
-      this.logger.silly('Creating user db record');
-
       const { salt, hashedPassword } = await this.hashPassword(userInputDTO.password);
 
       this.logger.silly('Creating user db record');
@@ -97,7 +95,7 @@ export default class AuthService {
     }
   }
 
-  public async changePassowrd(username: IUser['username'], newPassword: IUser['password']) {
+  public async changePassword(username: IUser['username'], newPassword: IUser['password']) {
     // This is a protected route called by the one who is changing the password themselves (Not even ADMIN can call this for their user, they need to use "resetPassword" route for that).
 
     const { salt, hashedPassword } = await this.hashPassword(newPassword);
@@ -127,7 +125,7 @@ export default class AuthService {
         throw 'Sorry, this action is not allowed for server admins.';
       }
 
-      const { user, token } = await this.changePassowrd(username, newPassword);
+      const { user, token } = await this.changePassword(username, newPassword);
 
       return { user, token };
     } catch (error) {
